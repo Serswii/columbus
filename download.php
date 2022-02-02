@@ -5,7 +5,7 @@ if ($_FILES && $_FILES['inputfile'] && $_FILES['inputfile']['error'] == 0 && $_F
     $error = false;
     $tmpname = $_FILES['inputfile']['tmp_name'];
     $new_path = "uploads/";
-    $new_name = $_FILES['inputfile']['name'] . ".csv";
+    $new_name = md5($_FILES['inputfile']['name']) . ".csv";
     if (move_uploaded_file($tmpname, $new_path . $new_name)) { // Перемещаем файл в желаемую директорию
        if(($file = fopen($new_path . $new_name, 'rb')) !== false){
            while (($mass = fgetcsv($file, 0, ';')) !== false) {
@@ -23,7 +23,9 @@ if ($_FILES && $_FILES['inputfile'] && $_FILES['inputfile']['error'] == 0 && $_F
                    if($row['name'] === 'Название'){
                        $out .= $row['id'].";".$row['name'].";Error\n";
                    }
-                   $out .= $row['id'].";".$row['name'].";\n";
+                   else {
+                       $out .= $row['id'].";".$row['name'].";\n";
+                   }
                    $search = $mysqli->query("SELECT * FROM `product` WHERE `Код` = '{$row['id']}'");
                    $count = $search->num_rows;
                    if(empty($count)){
@@ -44,5 +46,8 @@ if ($_FILES && $_FILES['inputfile'] && $_FILES['inputfile']['error'] == 0 && $_F
        }
         include_once("report.php");
        }
-
+}
+else {
+    echo "Неверный формат файла повторите попытку";
+    header("refresh: 3; url=http://columbus/");
 }

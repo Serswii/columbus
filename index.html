@@ -2,17 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>CSV-Добавление</title>
 </head>
 <body>
+<div class="container">
+    <div class="row ">
+        <div class="form-center w-50 rounded">
+            <form method="post" action="download.php" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="inputfile" class="form-label">Загрузка файла</label>
+                    <input type="file" name="inputfile" class="form-control" id="inputfile" aria-describedby="emailHelp">
+                </div>
+                <button type="submit" class="btn btn-primary">Загрузить файл</button>
+            </form>
+        </div>
 
+    </div>
+</div>
 </body>
 </html>
-<form method="post" action="download.php" enctype="multipart/form-data">
-    <label for="inputfile">Загрузка файла</label>
-    <input type="file" id="inputfile" name="inputfile"></br>
-    <input type="submit" value="Загрузить">
-</form>
